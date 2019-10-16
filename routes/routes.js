@@ -1,7 +1,10 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
-app.get('', (req, rsp) => {
+
+app.use(express.static(path.join( __dirname, '../public')))
+app.get('/', (req, rsp) => {
     rsp.send('Hello girl')  
 });
 
@@ -10,7 +13,7 @@ app.get('/help', (req, rsp) => {
 })
 
 app.get('/about', (req, rsp) => {
-    rsp.send('<h1>About Page</h1>')  
+    rsp.send('')  
 })
 
 app.get('/weather', (req, rsp) => {

@@ -1,20 +1,4 @@
 const axios = require('axios');
-const yargs = require('yargs');
-yargs.version('1.0.2');
-
-/* Sets up Yarg commands */
-const locationObj = {
-    location : {
-        desc: 'Location of where to search weather',
-        type: 'string',
-        demandOption: true,
-    },
-};
-
-yargs.command('get_weather', 'Finds the location and gets weather', locationObj, (argv) => {
-    getWeather(argv.location);
-}).help().argv;
-
 async function getLocation (loc) {
     try {
         const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(loc)}.json?access_token=pk.eyJ1IjoiY29tcHV0YXBhcnMiLCJhIjoiY2sxaTlrNXlpMW5xZTNqbXZwOXZwNnphZiJ9.-DBLUc_ogRzoKw6r6Ecv1w`)

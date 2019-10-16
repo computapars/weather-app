@@ -20,9 +20,13 @@ app.get('/about', (req, rsp) => {
 })
 
 app.get('/weather', (req, rsp) => {
+    if (!req.query.address) {
+        return rsp.send({
+            error: 'No address provided'
+        });
+    }
     rsp.send({
-        location: 'Marlene',
-        forecast: 'horrible',
+        address: req.query.address,
     })  
 })
 

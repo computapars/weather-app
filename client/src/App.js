@@ -11,6 +11,7 @@ import {
 import About from './about';
 import Help from './help';
 import Home from './home';
+import Page404 from './error';
 
 export default function App() {
   return (
@@ -30,15 +31,10 @@ export default function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/help">
-            <Help />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route exact path="/help" component={Help} />
+          <Route path="*" component={Page404} />
         </Switch>
       </div>
     </Router>

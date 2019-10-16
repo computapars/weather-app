@@ -5,19 +5,21 @@ class Home extends Component {
   constructor() {
     super();
       this.state = {
-          data: '',
+          title: '',
+          body: '',
       }
     }
   componentDidMount(){
     // todo: why did get to / fail?
     axios.get('/home').then(res => {
       this.setState({
-          data: res.data,
+          title: res.data.title,
+          body: res.data.body,
       });
     })
   }
   render() {
-    return <div>{this.state.data}</div>;
+    return <div>{this.state.title}{this.state.body}</div>;
   }
 }
 

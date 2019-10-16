@@ -5,7 +5,10 @@ const app = express();
 
 app.use(express.static(path.join( __dirname, '../public')))
 app.get('/home', (req, rsp) => {
-    rsp.send('Hello girl')  
+    rsp.send({
+        title: 'hey girl',
+        body: 'whats the deal'
+    })  
 });
 
 app.get('/help', (req, rsp) => {

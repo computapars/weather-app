@@ -1,5 +1,6 @@
 const axios = require('axios');
-export default async function getLocation (loc) {
+
+async function getLocation (loc) {
     try {
         const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(loc)}.json?access_token=pk.eyJ1IjoiY29tcHV0YXBhcnMiLCJhIjoiY2sxaTlrNXlpMW5xZTNqbXZwOXZwNnphZiJ9.-DBLUc_ogRzoKw6r6Ecv1w`)
         if (response.data.features.length == 0){
@@ -14,4 +15,8 @@ export default async function getLocation (loc) {
     } catch (err) {
         console.log('Unable to reach location services');
     }  
+}
+
+module.exports = {
+    getLocation: getLocation,
 }

@@ -5,19 +5,21 @@ class Weather extends Component {
     constructor() {
       super();
       this.state = {
-          data: '',
+          location: '',
+          summary: ''
       }
     }
   componentDidMount(){
     axios.get('/weather?address=Philadelphia').then(res => {
+      console.log(res)
       this.setState({
-          data: res.data.address,
+          location: res.data.name,
+          summary: res.data.summary,
       });
-      debugger;
     })
   }
   render() {
-    return <div>{this.state.data}</div>;
+    return <div>You must be in {this.state.location}. Where the {this.state.summary}</div>;
   }
 }
 

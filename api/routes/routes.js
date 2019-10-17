@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-
+const weather = require('./../utils/weather');
 const app = express();
 
 app.use(express.static(path.join( __dirname, '../public')))
@@ -24,10 +24,22 @@ app.get('/weather', (req, rsp) => {
         return rsp.send({
             error: 'No address provided'
         });
-    }
-    rsp.send({
-        address: req.query.address,
-    })  
-})
+    } else {
+        async function getTheWeather() {
+            try {
+                const forecast = await weather.getWeather(req.query.address);
+                return rsp.send({
+                    name: await forecast.name,
+                    summary: `${await forecast.summary} It is currently ${await forecast.temperature} degrees out. There is a ${await forecast.precipProbability}% chance of rain.`,
+                });
+            } catch (err) {
+                rsp.send({
+                    error: 'nope'
+                });
+            }
+        }
+        getTheWeather()
+    }    
+});
 
 app.listen(3001);

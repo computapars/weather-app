@@ -1,26 +1,51 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 const axios = require('axios');
 
 class Weather extends Component {
     constructor() {
-      super();
-      this.state = {
-          location: '',
-          summary: ''
-      }
+        super();
+        this.state = {
+          data: {
+            location: '',
+            summary: '',
+          },
+          address: '',
+        }
     }
-  componentDidMount(){
-    axios.get('/weather?address=Philadelphia').then(res => {
-      console.log(res)
+    handleChange = (e) => {
       this.setState({
-          location: res.data.name,
-          summary: res.data.summary,
-      });
-    })
-  }
-  render() {
-    return <div>You must be in {this.state.location}. Where the {this.state.summary}</div>;
-  }
+        address: e.target.value,
+      })
+    }
+    handleSubmit = (e) => {
+      const { address } = this.state;
+      e.preventDefault();
+      axios.get(`/weather?address=${address}`).then(res => {
+        console.log(res)
+        this.setState({
+            data: {
+              location: res.data.name,
+              summary: res.data.summary,
+            },
+        });
+      })
+    }
+    render() {
+        return (
+        <Fragment>
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Enter your address
+              </label>
+              <input placeholder="Address" onChange={this.handleChange} />
+              <button type="submit">
+                Submit
+              </button>
+            </form>
+            <div>You must be in {this.state.data.location}. Where the {this.state.data.summary}</div>
+          </Fragment>)
+        ;
+    }
 }
 
 export default Weather

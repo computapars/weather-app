@@ -1,3 +1,7 @@
 - linting
 - tabs vs spaces
 - use hooks
+- use suspense
+- accessibility
+- get image of location and use it as a background, blur it out and load weather in later
+- validation

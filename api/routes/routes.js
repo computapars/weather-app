@@ -29,8 +29,8 @@ app.get('/weather', (req, rsp) => {
             try {
                 const forecast = await weather.getWeather(req.query.address);
                 return rsp.send({
-                    name: await forecast.name,
-                    summary: `${await forecast.summary} It is currently ${await forecast.temperature} degrees out. There is a ${await forecast.precipProbability}% chance of rain.`,
+                    name: forecast.name,
+                    summary: `${forecast.summary} It is currently ${forecast.temperature} degrees out. There is a ${forecast.precipProbability}% chance of rain.`,
                 });
             } catch (err) {
                 rsp.send({
